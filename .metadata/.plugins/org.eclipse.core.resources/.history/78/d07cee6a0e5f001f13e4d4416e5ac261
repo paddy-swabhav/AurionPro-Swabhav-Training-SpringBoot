@@ -1,0 +1,46 @@
+package com.techlabs.dbconnect.entity;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+public class Loan {
+
+	@Column(name="loanid")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int loanid;
+	@Column(name="loanamount")
+	private double loanamount;
+	@Column(name="Interestrate")
+	private int Interestrate;
+	@Column(name="loanterm")
+	private int loanterm;
+	@Column(name="startdate")
+	private String startdate;
+	@Column(name="enddate")
+	private String enddate;
+	@Column(name="loanstatus")
+	private LoanStatus loanstatus;
+	
+	public Loan()
+	{
+		
+	}
+	
+	public Loan(int loanid, double loanamount, int interestrate, int loanterm, String startdate, String enddate,
+			LoanStatus loanstatus) {
+		super();
+		this.loanid = loanid;
+		this.loanamount = loanamount;
+		Interestrate = interestrate;
+		this.loanterm = loanterm;
+		this.startdate = startdate;
+		this.enddate = enddate;
+		this.loanstatus = loanstatus;
+	}
+	
+	
+	
+}

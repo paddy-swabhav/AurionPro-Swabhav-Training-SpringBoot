@@ -1,0 +1,12 @@
+package com.techlabs.dbconnect.controllers;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RequestMapping("/bankapp")
+public class CustomerController {
+	
+	CutomerService customerservice;
+	
+
+	
+}

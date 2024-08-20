@@ -1,0 +1,5 @@
+package com.techlabs.di.entity;
+
+public class Harddisk {
+
+}

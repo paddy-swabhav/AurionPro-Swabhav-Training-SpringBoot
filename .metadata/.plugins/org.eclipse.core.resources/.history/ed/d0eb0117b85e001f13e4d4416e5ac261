@@ -1,0 +1,31 @@
+package com.techlabs.dbconnect.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.techlabs.dbconnect.entity.Employee;
+import com.techlabs.dbconnect.services.EmployeeService;
+
+
+@RestController
+public class EmployeeController {
+
+	@Autowired
+	private EmployeeService employeeservice;
+	
+	@GetMapping("/Employees")
+	public List<Employee> getAllEmployees()
+	{
+		return employeeservice.getAllEmployees();
+	}
+	
+	@GetMapping("/AddEmployees")
+	public void addEmployee()
+	{
+		employeeservice.addEmployees();
+	}
+
+}

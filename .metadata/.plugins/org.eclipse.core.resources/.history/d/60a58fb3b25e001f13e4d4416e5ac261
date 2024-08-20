@@ -1,0 +1,9 @@
+package com.techlabs.dbconnect.entity;
+
+public class Employee {
+	
+	private int empid;
+	private String name;
+	private String designation;
+
+}

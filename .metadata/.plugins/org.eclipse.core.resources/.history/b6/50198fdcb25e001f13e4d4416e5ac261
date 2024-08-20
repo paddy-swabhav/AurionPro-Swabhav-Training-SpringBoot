@@ -1,0 +1,14 @@
+package com.techlabs.dbconnect.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="employees")
+public class Employee {
+	
+	private int empid;
+	private String name;
+	private String designation;
+
+}

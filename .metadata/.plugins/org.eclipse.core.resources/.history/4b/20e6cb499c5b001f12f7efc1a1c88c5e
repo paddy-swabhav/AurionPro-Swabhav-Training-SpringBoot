@@ -1,0 +1,9 @@
+package com.techlabs.dbconnect.entity;
+
+public class Student {
+
+	private int rollno;
+	private String name;
+	private int age;
+	
+}

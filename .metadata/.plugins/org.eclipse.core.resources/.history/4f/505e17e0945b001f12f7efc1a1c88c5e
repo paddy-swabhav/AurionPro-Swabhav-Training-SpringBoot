@@ -1,0 +1,5 @@
+package com.techlabs.di.config;
+
+public class ApplicationConfig {
+
+}

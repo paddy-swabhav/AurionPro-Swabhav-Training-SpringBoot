@@ -1,0 +1,10 @@
+package com.techlabs.di.controllers;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ComputerController {
+
+	
+	
+}

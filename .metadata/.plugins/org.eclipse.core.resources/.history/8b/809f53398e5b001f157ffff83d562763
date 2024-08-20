@@ -1,0 +1,5 @@
+package com.techlabs.first.controllers;
+
+public class FirstRestController {
+
+}

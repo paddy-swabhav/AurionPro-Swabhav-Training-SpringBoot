@@ -1,0 +1,13 @@
+package com.techlabs.dbconnect.entity;
+
+public class Loan {
+
+	private int loanid;
+	private double loanAmount;
+	private int InterestRate;
+	private int loanTerm;
+	private String startDate;
+	private String endDate;
+	private LoanStatus loanStatus;
+	
+}
