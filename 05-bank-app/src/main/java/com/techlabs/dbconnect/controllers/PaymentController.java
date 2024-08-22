@@ -3,6 +3,7 @@ package com.techlabs.dbconnect.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techlabs.dbconnect.entity.Payment;
+import com.techlabs.dbconnect.entity.PaymentMode;
+import com.techlabs.dbconnect.entity.PaymentStatus;
 import com.techlabs.dbconnect.services.PaymentService;
 
 import jakarta.transaction.Transactional;
@@ -25,15 +28,15 @@ public class PaymentController {
 	private PaymentService paymentservice;
 	
 	@GetMapping("/payment")
-	public List<Payment> getAllPayments() {
+	public ResponseEntity<List<Payment>> getAllPayments() {
 		
-		return paymentservice.getAllPayments();
+		return ResponseEntity.ok(paymentservice.getAllPayments());
 	}
 
 	@GetMapping("/payment/{paymentid}")
-	public Payment getPaymentById(@PathVariable int paymentid) {
+	public ResponseEntity<Payment> getPaymentById(@PathVariable int paymentid) {
 		
-		return paymentservice.getPaymentById(paymentid);
+		return ResponseEntity.ok(paymentservice.getPaymentById(paymentid));
 	}
 
 	@PostMapping("/payment")
@@ -60,7 +63,17 @@ public class PaymentController {
 		return "Payment Updated";
 	}
 	
+	@GetMapping("/payment/status/{paymentstatus}")
+	public ResponseEntity<List<Payment>> getPaymentByStatus(@PathVariable PaymentStatus paymentstatus) {
+		
+		return ResponseEntity.ok(paymentservice.getPaymentByStatus(paymentstatus));
+	}
 	
+	@GetMapping("/payment/mode/{paymentmode}")
+	public ResponseEntity<List<Payment>> getPaymentByMode(PaymentMode paymentmode) {
+		
+		return ResponseEntity.ok(paymentservice.getPaymentByMode(paymentmode));
+	}
 
 	
 }

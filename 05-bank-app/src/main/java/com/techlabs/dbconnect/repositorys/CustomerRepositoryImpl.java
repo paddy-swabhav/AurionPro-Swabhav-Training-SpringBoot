@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.techlabs.dbconnect.entity.Customer;
+import com.techlabs.dbconnect.entity.Loan;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -59,8 +60,10 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 
 	@Override
 	public List<Customer> getCustomerByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		TypedQuery<Customer> query = manager.createQuery("SELECT c FROM Customer c where c.firstname=:thename",Customer.class);
+		 query.setParameter("thename", name);
+		return query.getResultList();
 	}
 
 }

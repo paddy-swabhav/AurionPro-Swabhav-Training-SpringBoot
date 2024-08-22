@@ -47,8 +47,8 @@ public class LoanServiceImpl implements LoanService{
 
 	@Override
 	public List<Loan> getLoanByStatus(LoanStatus loanstatus) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return loanRepo.getLoanByStatus(loanstatus);
 	}
 
 

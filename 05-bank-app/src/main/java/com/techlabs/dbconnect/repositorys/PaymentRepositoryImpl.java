@@ -22,7 +22,7 @@ public class PaymentRepositoryImpl implements PaymentRepository{
 	@Override
 	public List<Payment> getAllPayments() {
 		
-		TypedQuery<Payment> query = manager.createQuery("SELECT c FROM Payment c",Payment.class);
+		TypedQuery<Payment> query = manager.createQuery("SELECT p FROM Payment p",Payment.class);
 		return query.getResultList();
 	}
 
@@ -60,14 +60,16 @@ public class PaymentRepositoryImpl implements PaymentRepository{
 
 	@Override
 	public List<Payment> getPaymentByStatus(PaymentStatus paymentstatus) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Payment> query = manager.createQuery("SELECT p FROM Payment p where p.paymentstatus=:thepaymentstatus ",Payment.class);
+		 query.setParameter("thepaymentstatus", paymentstatus);
+		return query.getResultList();
 	}
 
 	@Override
 	public List<Payment> getPaymentByMode(PaymentMode paymentmode) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Payment> query = manager.createQuery("SELECT p FROM Payment p where p.paymentmode=:thepaymentmode ",Payment.class);
+		 query.setParameter("thepaymentmode", paymentmode);
+		return query.getResultList();
 	}
 
 }

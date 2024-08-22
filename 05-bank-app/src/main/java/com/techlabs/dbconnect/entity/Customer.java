@@ -7,8 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="customers")
 public class Customer {
 
 	@Column(name="customerid")
@@ -21,7 +23,7 @@ public class Customer {
 	private String lastname;
 	@Column(name="dateOfBirth")
 	private Date dateOfBirth;
-	@Column(name="emailid")
+	@Column(name="emailid", nullable = false)
 	private String emailid;
 	@Column(name="mobilenumber")
 	private int mobileNumber;

@@ -48,14 +48,14 @@ public class PaymentServiceImpl implements PaymentService{
 
 	@Override
 	public List<Payment> getPaymentByStatus(PaymentStatus paymentstatus) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return paymentRepo.getPaymentByStatus(paymentstatus);
 	}
 
 	@Override
 	public List<Payment> getPaymentByMode(PaymentMode paymentmode) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return paymentRepo.getPaymentByMode(paymentmode);
 	}
 
 

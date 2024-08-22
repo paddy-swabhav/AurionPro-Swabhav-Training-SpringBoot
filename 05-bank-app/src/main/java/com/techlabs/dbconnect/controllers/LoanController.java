@@ -3,6 +3,7 @@ package com.techlabs.dbconnect.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techlabs.dbconnect.entity.Loan;
+import com.techlabs.dbconnect.entity.LoanStatus;
 import com.techlabs.dbconnect.services.LoanService;
 
 import jakarta.transaction.Transactional;
@@ -25,15 +27,15 @@ public class LoanController {
 	private LoanService loanservice;
 	
 	@GetMapping("/loan")
-	public List<Loan> getAllLoans() {
+	public ResponseEntity<List<Loan>> getAllLoans() {
 		
-		return loanservice.getAllLoans();
+		return ResponseEntity.ok(loanservice.getAllLoans());
 	}
 
 	@GetMapping("/loan/{loanid}")
-	public Loan getLoanById(@PathVariable int loanid) {
+	public ResponseEntity<Loan> getLoanById(@PathVariable int loanid) {
 		
-		return loanservice.getLoanById(loanid);
+		return ResponseEntity.ok(loanservice.getLoanById(loanid));
 	}
 
 	@PostMapping("/loan")
@@ -60,7 +62,11 @@ public class LoanController {
 		return "Loan Updated";
 	}
 	
-	
+	@GetMapping("/loan/status/{loanstatus}")
+	public ResponseEntity<List<Loan>> getLoanByStatus(@PathVariable LoanStatus loanstatus)
+	{
+		return ResponseEntity.ok(loanservice.getLoanByStatus(loanstatus));
+	}
 	
 
 	

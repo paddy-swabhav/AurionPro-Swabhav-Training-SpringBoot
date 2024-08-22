@@ -1,5 +1,0 @@
-package com.techlabs.dbconnect.repositorys;
-
-public class CustomerRepositoryImpl {
-
-}

@@ -59,8 +59,10 @@ public class LoanRepositoryImpl implements LoanRepository{
 
 	@Override
 	public List<Loan> getLoanByStatus(LoanStatus loanstatus) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		TypedQuery<Loan> query = manager.createQuery("SELECT c FROM Loan c where c.loanstatus=:theloanstatus",Loan.class);
+		 query.setParameter("theloanstatus", loanstatus);
+		return query.getResultList();
 	}	
 
 
