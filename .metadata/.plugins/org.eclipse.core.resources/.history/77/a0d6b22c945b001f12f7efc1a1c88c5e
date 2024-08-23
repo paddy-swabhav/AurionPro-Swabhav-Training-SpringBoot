@@ -1,7 +1,0 @@
-package com.techlabs.di.entity;
-
-public class Computer {
-
-	private String name;
-	private String harddisk;
-}
