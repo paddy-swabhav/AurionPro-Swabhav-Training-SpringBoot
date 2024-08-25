@@ -43,9 +43,9 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/employees")
-	public String saveEmployee(@Valid @RequestBody Employee employee) {
-		employeeservice.saveEmployee(employee);
-		return "Employee Saved";
+	public Employee saveEmployee(@Valid @RequestBody Employee employee) {
+		return employeeservice.saveEmployee(employee);
+
 	}
 
 	@DeleteMapping("/employees")
