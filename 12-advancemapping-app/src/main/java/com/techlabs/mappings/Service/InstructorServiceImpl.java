@@ -1,18 +1,15 @@
 package com.techlabs.mappings.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.techlabs.mappings.dto.CourseDto;
 import com.techlabs.mappings.dto.InstructorDto;
-import com.techlabs.mappings.dto.PageResponse;
 import com.techlabs.mappings.entity.Course;
-import com.techlabs.mappings.entity.Instructor;
 import com.techlabs.mappings.entity.Instructor;
 import com.techlabs.mappings.repository.CourseRepository;
 import com.techlabs.mappings.repository.InstructorRepository;
@@ -26,40 +23,62 @@ public class InstructorServiceImpl implements InstructorService{
 	@Autowired
 	private CourseRepository courseRepo;
 	
+	@Autowired
+	private CourseService courseService;
+	
 	
 	@Override
-	public Instructor addInstructor(InstructorDto instructorDto) {
+	public InstructorDto addInstructor(InstructorDto instructorDto) {
 		
+		Instructor instructor = toInstructorMapper(instructorDto);
+		
+		instructorRepo.save(instructor);
+		
+		return toInstructorDtoMapper(instructor);
+	}
+
+	//MAPPERS
+	private Instructor toInstructorMapper(InstructorDto instructorDto)
+	{
 		Instructor instructor = new Instructor();
 		instructor.setInstructorName(instructorDto.getInstructorName());
 		instructor.setEmail(instructorDto.getEmail());
 		instructor.setQualification(instructorDto.getQualification());
-		
-		return instructorRepo.save(instructor);
+		return instructor;
 	}
-
-
+	
+	private InstructorDto toInstructorDtoMapper(Instructor instructor)
+	{
+		InstructorDto instructorDto = new InstructorDto();
+		instructorDto.setInstructorId(instructor.getInstructorId());
+		instructorDto.setInstructorName(instructor.getInstructorName());
+		instructorDto.setEmail(instructor.getEmail());
+		instructorDto.setQualification(instructor.getQualification());
+		
+		return instructorDto;
+	}
+	//MAPPERS
+	
+	
+	
 	@Override
-	public Instructor allocateCourses(int instructorId, List<Course> courses) {
+	public Instructor allocateCourses(int instructorId, List<Integer> courseIds) {
 
-		Instructor dbInstructor;
-		Optional<Instructor> optionalInstructor = instructorRepo.findById(instructorId);
-		if(!optionalInstructor.isPresent())
-			return null;
-		dbInstructor = optionalInstructor.get();
+		Instructor dbInstructor = getInstructor(instructorId);
 		
-		List<Course> dbCourses = dbInstructor.getCourses();
-		
-		
-		courses.forEach((course)-> {
-			
-			Course temp = courseRepo.findById(course.getCourseId()).get();
+		List<Course> dbCourses = courseService.getAllCourse(instructorId);
 
-			temp.setInstructor(dbInstructor);
+		
+		List<Course> coursesToAdd = new ArrayList<>();
+		
+		courseIds.forEach((courseId)->{
 			
-			dbCourses.add(temp);
+			Course course = courseService.getCourseById(courseId);
+			course.setInstructor(dbInstructor);
+			coursesToAdd.add(course);
 		});
 		
+		dbCourses.addAll(coursesToAdd);
 		dbInstructor.setCourses(dbCourses);
 		
 		return instructorRepo.save(dbInstructor);
@@ -67,20 +86,41 @@ public class InstructorServiceImpl implements InstructorService{
 
 
 	@Override
-	public PageResponse<Instructor> getAllInstructors(int pagenumber, int pagesize) {
+	public List<InstructorDto> getAllInstructors(int pagenumber, int pagesize) {
 		
-		
-		Pageable pageable = PageRequest.of(pagenumber, pagesize);
-		Page<Instructor> instructorPage = instructorRepo.findAll(pageable);
-		
-		PageResponse<Instructor> instructorPageResponse = new PageResponse();
-		instructorPageResponse.setTotalPages(instructorPage.getTotalPages());
-		instructorPageResponse.setTotalElements(instructorPage.getTotalElements());
-		instructorPageResponse.setSize(instructorPage.getSize());
-		instructorPageResponse.setContent(instructorPage.getContent());
-		instructorPageResponse.setLastPage(instructorPage.isLast());
-		
-		return instructorPageResponse;
+		 List<InstructorDto> instructors = new ArrayList<>();
+		  
+		  List<Instructor> dbInstructors=instructorRepo.findAll();
+		  
+		  dbInstructors.forEach((instructor)->{;
+		  instructors.add(toInstructorDtoMapper(instructor));
+		  });
+		  return instructors;
 	}
+
+	@Override
+	public InstructorDto getInstructorDto(int instructorId) {
+		
+		Instructor dbinstructor = new Instructor();
+		Optional<Instructor> instructor = instructorRepo.findById(instructorId);
+		dbinstructor = instructor.get();
+		
+		return toInstructorDtoMapper(dbinstructor);
+	}
+
+	@Override
+	public Instructor getInstructor(int instructorId) {
+
+		return instructorRepo.findById(instructorId).get();
+	}
+	
+	@Override
+	public List<CourseDto> getCoursesByInstructor(int instructorId) {
+		
+		return courseService.getAllCourseDto(instructorId);
+	}
+
+
+
 
 }

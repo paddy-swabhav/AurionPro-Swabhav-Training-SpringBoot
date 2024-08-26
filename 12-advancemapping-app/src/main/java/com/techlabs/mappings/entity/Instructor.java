@@ -40,7 +40,7 @@ public class Instructor {
 	@Column(name = "qualification")
 	private String qualification;
 	
-	@OneToMany(mappedBy = "instructor", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})		//variable name declared in the course table
+	@OneToMany(mappedBy = "instructor", cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})		//variable name declared in the course table
 	@JsonIgnore
 	private List<Course> courses;
 }

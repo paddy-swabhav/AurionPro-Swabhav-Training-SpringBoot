@@ -34,7 +34,7 @@ public class Course {
 	@Column(name = "fees")
 	public double fees;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "instructorId")
 	private Instructor instructor;
 }

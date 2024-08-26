@@ -22,7 +22,7 @@ public class CourseController {
 
 	@Autowired
 	private CourseService courseService;
-	
+		
 	@PostMapping("/course")
 	public ResponseEntity<Course> addCourse(@RequestBody CourseDto courseDto)
 	{

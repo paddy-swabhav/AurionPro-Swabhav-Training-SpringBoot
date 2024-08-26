@@ -1,5 +1,7 @@
 package com.techlabs.mappings.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ class CourseServiceImpl implements CourseService{
 	
 	@Autowired
 	private InstructorRepository instructorRepo;
+	
+//	@Autowired
+//	private InstructorService instructorService; 
 
 	@Override
 	public Course addCourse(CourseDto coursedto) {
@@ -69,9 +74,64 @@ class CourseServiceImpl implements CourseService{
 		coursePageResponse.setLastPage(coursePage.isLast());
 		
 		return coursePageResponse;
+	}
 
+	@Override
+	public List<CourseDto> getAllCourseDto(int instructorId) {
+		
+		List<Course> coursesDb = courseRepo.findAllByInstructor(instructorRepo.findById(instructorId).get());
+		
+		List<CourseDto> courses = new ArrayList<>();
+		
+		coursesDb.forEach((course)->{
+			
+			courses.add(toCourseDto(course));
+		}
+		);
+
+		return courses;
+	}
+
+	@Override
+	public CourseDto toCourseDto(Course course) {
+		
+		CourseDto courseDto = new CourseDto();
+		courseDto.setCourseId(course.getCourseId());
+		courseDto.setCourseName(course.getCourseName());
+		courseDto.setDuration(course.getDuration());
+		courseDto.setFees(course.getFees());
+		return null;
 	}
 	
+	@Override
+	public Course toCourseMapper(CourseDto courseDto) {
+		
+		Course course = new Course();
+		course.setCourseId(courseDto.getCourseId());
+		course.setCourseName(courseDto.getCourseName());
+		course.setDuration(courseDto.getDuration());
+		course.setFees(courseDto.getFees());
+		return null;
+	}
+
+	@Override
+	public Course getCourseById(int courseid) {
+		
+		Optional<Course> optionalCourse = courseRepo.findById(courseid);
+		if(!optionalCourse.isPresent())
+		return null;
+		
+		Course dbcourse = optionalCourse.get();
+		
+		return dbcourse;
+	}
+
+	@Override
+	public List<Course> getAllCourse(int instructorId) {
+
+		List<Course> courses = courseRepo.findAllByInstructor(instructorRepo.findById(instructorId).get());
+		return courses;
+	}
 	
 	
 	

@@ -26,19 +26,19 @@ public class InstructorController {
 	private InstructorService instructorService;
 	
 	@PostMapping("/instructor")
-	public ResponseEntity<Instructor> addInstructor(@RequestBody InstructorDto instructor)
+	public ResponseEntity<InstructorDto> addInstructor(@RequestBody InstructorDto instructor)
 	{
 		return ResponseEntity.ok(instructorService.addInstructor(instructor));
 	}
 	
 	@PutMapping("/instructor/courses")
-	public ResponseEntity<Instructor> allocateCourses(@RequestParam int instructorId,@RequestBody List<Course> courses)
+	public ResponseEntity<Instructor> allocateCourses(@RequestParam int instructorId,@RequestBody List<Integer> courseIds)
 	{
-		return ResponseEntity.ok(instructorService.allocateCourses(instructorId,courses));
+		return ResponseEntity.ok(instructorService.allocateCourses(instructorId,courseIds));
 	}
 	
 	@GetMapping("/instructor")
-	public ResponseEntity<PageResponse<Instructor>> getAllInstructors(@RequestParam int pagenumber,@RequestParam int pagesize)
+	public ResponseEntity<List<InstructorDto>> getAllInstructors(@RequestParam int pagenumber,@RequestParam int pagesize)
 	{
 		return ResponseEntity.ok(instructorService.getAllInstructors(pagenumber,pagesize));
 	}
