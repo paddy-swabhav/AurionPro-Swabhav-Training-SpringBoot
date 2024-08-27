@@ -128,8 +128,8 @@ public class StudentServiceImpl implements StudentService{
 	
 	
 	//MAPPERS
-	
-	private StudentDto toStudentDtoMApper(Student student)
+	@Override
+	public StudentDto toStudentDtoMApper(Student student)
 	{
 		StudentDto studentDto = new StudentDto();
 		studentDto.setAge(student.getAge());
@@ -139,7 +139,8 @@ public class StudentServiceImpl implements StudentService{
 		return studentDto;
 	}
 	
-	private Student toStudentMApper(StudentDto studentDto)
+	@Override
+	public Student toStudentMApper(StudentDto studentDto)
 	{
 		Student student = new Student();
 		student.setAge(studentDto.getAge());

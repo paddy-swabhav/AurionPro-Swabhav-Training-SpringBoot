@@ -4,8 +4,7 @@ import java.util.List;
 
 import com.techlabs.mappings.dto.CourseDto;
 import com.techlabs.mappings.dto.InstructorDto;
-import com.techlabs.mappings.dto.PageResponse;
-import com.techlabs.mappings.entity.Course;
+import com.techlabs.mappings.dto.StudentDto;
 import com.techlabs.mappings.entity.Instructor;
 
 public interface InstructorService {
@@ -22,4 +21,6 @@ public interface InstructorService {
 	public Instructor allocateCourses(int instructorId, List<Integer> courseIds);
 
 	public List<InstructorDto> getAllInstructors(int pagenumber, int pagesize);
+
+	public List<StudentDto> getstudentsByInstructorId(int intstructorId);
 }

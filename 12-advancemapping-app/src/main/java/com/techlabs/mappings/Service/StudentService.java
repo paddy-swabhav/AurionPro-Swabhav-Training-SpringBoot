@@ -20,4 +20,8 @@ public interface StudentService {
 	public Student updateStudentCityById(int rollnumber, Address city);
 
 	public StudentDto assignCourses(int rollnumber, List<Integer> courseIds);
+
+	StudentDto toStudentDtoMApper(Student student);
+
+	Student toStudentMApper(StudentDto studentDto);
 }

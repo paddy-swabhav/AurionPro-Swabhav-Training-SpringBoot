@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.techlabs.mappings.dto.CourseDto;
 import com.techlabs.mappings.dto.InstructorDto;
+import com.techlabs.mappings.dto.StudentDto;
 import com.techlabs.mappings.entity.Course;
 import com.techlabs.mappings.entity.Instructor;
+import com.techlabs.mappings.entity.Student;
 import com.techlabs.mappings.repository.CourseRepository;
 import com.techlabs.mappings.repository.InstructorRepository;
 
@@ -22,6 +24,9 @@ public class InstructorServiceImpl implements InstructorService{
 	
 	@Autowired
 	private CourseRepository courseRepo;
+	
+	@Autowired
+	private StudentService studentService;
 	
 	@Autowired
 	private CourseService courseService;
@@ -119,6 +124,38 @@ public class InstructorServiceImpl implements InstructorService{
 		
 		return courseService.getAllCourseDto(instructorId);
 	}
+
+	@Override
+	public List<StudentDto> getstudentsByInstructorId(int instructorId) {
+
+	    List<Course> courses = courseService.getAllCourse(instructorId);
+	    List<Student> students = new ArrayList<>();
+	    courses.forEach(course -> {
+	        students.addAll(course.getStudents());
+	    });
+
+	    List<StudentDto> studentDtos = new ArrayList<>();
+
+	    students.forEach(student -> {
+	        boolean exists = false;
+	        for (StudentDto studentDto : studentDtos) 
+	        {
+	            if (student.getRollnumber() == studentDto.getRollnumber()) 
+	            {
+	                exists = true;
+	                break;
+	            }
+	        }
+	        
+	        if (!exists) 
+	        {
+	            studentDtos.add(studentService.toStudentDtoMApper(student));
+	        }
+	    });
+
+	    return studentDtos;
+	}
+
 
 
 

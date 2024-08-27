@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +30,7 @@ public class CourseController {
 	public ResponseEntity<Course> addCourse(@RequestBody CourseDto courseDto)
 	{
 		return ResponseEntity.ok(courseService.addCourse(courseDto));
-	}
+	}	
 	
 	@PutMapping("/course/instructors")
 	public ResponseEntity<Course> allocateCourses(@RequestParam int courseId,@RequestBody Instructor instructor)
@@ -47,5 +48,11 @@ public class CourseController {
 	public ResponseEntity<CourseDto> assignStudents(@RequestParam int courseid, @RequestBody List<Integer> studentIds)
 	{
 		return ResponseEntity.ok(courseService.assignStudents(courseid,studentIds));
+	}
+	
+	@GetMapping("/course/instructor/{intstructorId}")
+	public ResponseEntity<List<CourseDto>> getCoursesByInstructorId(@PathVariable int intstructorId)
+	{
+		return ResponseEntity.ok(courseService.getAllCourseDto(intstructorId));
 	}
 }
