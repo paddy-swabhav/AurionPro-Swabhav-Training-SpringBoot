@@ -1,6 +1,10 @@
 package com.techlabs.mappings.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,10 +13,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.techlabs.mappings.dto.PageResponse;
-import com.techlabs.mappings.dto.StudentAddressDto;
-import com.techlabs.mappings.dto.StudentDetails;
+import com.techlabs.mappings.dto.StudentDto;
 import com.techlabs.mappings.entity.Address;
+import com.techlabs.mappings.entity.Course;
 import com.techlabs.mappings.entity.Student;
+import com.techlabs.mappings.repository.CourseRepository;
 import com.techlabs.mappings.repository.StudentRepository;
 @Service
 public class StudentServiceImpl implements StudentService{
@@ -20,41 +25,75 @@ public class StudentServiceImpl implements StudentService{
 	@Autowired
 	private StudentRepository studentRepo;
 	
+	@Autowired
+	private CourseRepository courseRepo;
+	
 	@Override
-	public Student addStudent(Student student) {
-		// TODO Auto-generated method stub
-		return studentRepo.save(student);
+	public StudentDto addStudent(Student student) {
+		
+		return toStudentDtoMApper(studentRepo.save(student));
 	}
 
 	@Override
-	public PageResponse<Student> getAllStudents(int pagenumber,int pagesize) {
+	public PageResponse<StudentDto> getAllStudents(int pagenumber,int pagesize) {
 		
 		
 		Pageable pageable = PageRequest.of(pagenumber, pagesize);
 		Page<Student> studentPage = studentRepo.findAll(pageable);
 		
-		PageResponse<Student> studentPageResponse = new PageResponse();
+		PageResponse<StudentDto> studentPageResponse = new PageResponse();
 		studentPageResponse.setTotalPages(studentPage.getTotalPages());
 		studentPageResponse.setTotalElements(studentPage.getTotalElements());
 		studentPageResponse.setSize(studentPage.getSize());
-		studentPageResponse.setContent(studentPage.getContent());
 		studentPageResponse.setLastPage(studentPage.isLast());
 		
+		List<StudentDto> studentDtoList = new ArrayList<>();
+		
+		studentPage.getContent().forEach((student)->{
+			studentDtoList.add(toStudentDtoMApper(student));
+		});
+		
+		studentPageResponse.setContent(studentDtoList);
+
 		return studentPageResponse;
 	}
 
 	@Override
-	public StudentDetails findStudentDetailsById(int rollnumber) {
+	public StudentDto findStudentDetailsById(int rollnumber) {
 		
-		Optional<Student> optionalStudent = studentRepo.findById(rollnumber);
+		Student student = studentRepo.findById(rollnumber).orElseThrow(
+						()-> new NullPointerException("Student Not Found"));
+
+		return toStudentDtoMApper(student);
+	}
+	
+	@Override
+	public StudentDto assignCourses(int rollnumber, List<Integer> courseIds) {
+	
+		Student dbstudent = studentRepo.findById(rollnumber).orElseThrow(()->new NullPointerException());
 		
-		Student student = optionalStudent.get();
+		Set<Course> existingCourses = dbstudent.getCourses();
+		if(existingCourses==null)
+			existingCourses = new HashSet<>();
 		
-		StudentDetails studentDetail = new StudentDetails();
-		studentDetail.setRollnumber(student.getRollnumber());
-		studentDetail.setName(student.getName());
-		studentDetail.setAge(student.getAge());
-		return studentDetail;
+		
+		Set<Course> coursesToAdd = new HashSet<>();
+		courseIds.forEach((id)->{
+			Course course = courseRepo.findById(id)
+					.orElseThrow(()-> new NullPointerException());
+		
+		List<Student> existingStudents = course.getStudents();
+		if(existingStudents==null)
+			existingStudents = new ArrayList<>();
+		
+		coursesToAdd.add(course);
+		
+		});
+		
+		existingCourses.addAll(coursesToAdd);
+		dbstudent.setCourses(existingCourses);
+		
+		return toStudentDtoMApper(studentRepo.save(dbstudent));
 	}
 
 	@Override
@@ -75,14 +114,7 @@ public class StudentServiceImpl implements StudentService{
 		if(!optionalStudent.isPresent())
 			return null;
 		dbStudent = optionalStudent.get();  // saving the retrived Student value in dbStudent 
-		
-//		Address dbAddress = dbStudent.getAddress();   // saving the address of retrived Student in Address object
-//		dbAddress.setCity(city);     // setting the change city in address
-//		
-//		dbStudent.setAddress(dbAddress);  //  setting the changed address in the student object
-//		
-//		studentRepo.save(dbStudent);  // saving the updates student object to save in database
-		
+
 		Address address = dbStudent.getAddress();
 		address.setCity(city.getCity());
 		dbStudent.setAddress(address);
@@ -94,4 +126,27 @@ public class StudentServiceImpl implements StudentService{
 	
 	
 	
+	
+	//MAPPERS
+	
+	private StudentDto toStudentDtoMApper(Student student)
+	{
+		StudentDto studentDto = new StudentDto();
+		studentDto.setAge(student.getAge());
+		studentDto.setName(student.getName());
+		studentDto.setRollnumber(student.getRollnumber());
+		
+		return studentDto;
+	}
+	
+	private Student toStudentMApper(StudentDto studentDto)
+	{
+		Student student = new Student();
+		student.setAge(studentDto.getAge());
+		student.setName(studentDto.getName());
+		
+		return student;
+	}
+
+
 }

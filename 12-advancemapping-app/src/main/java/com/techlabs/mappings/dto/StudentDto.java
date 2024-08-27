@@ -11,7 +11,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class StudentDetails {
+public class StudentDto {
 
 	private int rollnumber;
 	private String name;

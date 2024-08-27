@@ -25,4 +25,6 @@ public interface CourseService {
 	Course toCourseMapper(CourseDto courseDto);
 	
 	Course getCourseById(int courseid);
+	
+	CourseDto assignStudents(int courseid, List<Integer> studentIds);
 }

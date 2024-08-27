@@ -1,5 +1,7 @@
 package com.techlabs.mappings.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,5 +41,11 @@ public class CourseController {
 	public ResponseEntity<PageResponse<Course>> getAllInstructors(@RequestParam(defaultValue = "0") int pagenumber,@RequestParam(defaultValue = "10") int pagesize)
 	{
 		return ResponseEntity.ok(courseService.getAllCourse(pagenumber,pagesize));
+	}
+	
+	@PutMapping("/course/students")
+	public ResponseEntity<CourseDto> assignStudents(@RequestParam int courseid, @RequestBody List<Integer> studentIds)
+	{
+		return ResponseEntity.ok(courseService.assignStudents(courseid,studentIds));
 	}
 }

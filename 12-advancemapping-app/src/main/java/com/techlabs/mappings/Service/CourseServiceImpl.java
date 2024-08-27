@@ -1,8 +1,10 @@
 package com.techlabs.mappings.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,8 +16,10 @@ import com.techlabs.mappings.dto.CourseDto;
 import com.techlabs.mappings.dto.PageResponse;
 import com.techlabs.mappings.entity.Course;
 import com.techlabs.mappings.entity.Instructor;
+import com.techlabs.mappings.entity.Student;
 import com.techlabs.mappings.repository.CourseRepository;
 import com.techlabs.mappings.repository.InstructorRepository;
+import com.techlabs.mappings.repository.StudentRepository;
 
 @Service
 class CourseServiceImpl implements CourseService{
@@ -25,6 +29,9 @@ class CourseServiceImpl implements CourseService{
 	
 	@Autowired
 	private InstructorRepository instructorRepo;
+	
+	@Autowired
+	private StudentRepository studentRepo;
 	
 //	@Autowired
 //	private InstructorService instructorService; 
@@ -100,7 +107,7 @@ class CourseServiceImpl implements CourseService{
 		courseDto.setCourseName(course.getCourseName());
 		courseDto.setDuration(course.getDuration());
 		courseDto.setFees(course.getFees());
-		return null;
+		return courseDto;
 	}
 	
 	@Override
@@ -111,7 +118,7 @@ class CourseServiceImpl implements CourseService{
 		course.setCourseName(courseDto.getCourseName());
 		course.setDuration(courseDto.getDuration());
 		course.setFees(courseDto.getFees());
-		return null;
+		return course;
 	}
 
 	@Override
@@ -131,6 +138,37 @@ class CourseServiceImpl implements CourseService{
 
 		List<Course> courses = courseRepo.findAllByInstructor(instructorRepo.findById(instructorId).get());
 		return courses;
+	}
+
+	@Override
+	public CourseDto assignStudents(int courseid, List<Integer> studentIds) {
+		
+		Course dbCourse = courseRepo.findById(courseid).orElseThrow(()-> new NullPointerException("Course does not exist")); 
+		   
+		  List<Student> existingStudents = dbCourse.getStudents(); 
+		  if(existingStudents ==null) 
+		   existingStudents = new ArrayList<>(); 
+		   
+		  List<Student> studentsToAdd = new ArrayList<>(); 
+		   
+		  studentIds.forEach((id)-> { 
+		   Student student = studentRepo.findById(id).orElseThrow(()-> new NullPointerException("student not found")); 
+		    
+		   Set<Course> existingCourse = student.getCourses(); 
+		   if(existingCourse ==null) 
+		    existingCourse = new HashSet<>(); 
+		    
+		   existingCourse.add(dbCourse); 
+		   studentsToAdd.add(student); 
+		      
+		  }); 
+		   
+		  existingStudents.addAll(studentsToAdd); 
+		  dbCourse.setStudents(existingStudents); 
+		   
+		 
+		  return toCourseDto(courseRepo.save(dbCourse)); 
+
 	}
 	
 	
