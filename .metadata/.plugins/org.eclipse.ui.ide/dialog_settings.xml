@@ -38,6 +38,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="D:\Spring_Assignments\spring-boot-captcha-master"/>
 			<item value="D:\Spring_Assignments\02-firstspring-app"/>
 			<item value="D:\Spring_Assignments\01-dependencyinjection-app"/>
 		</list>

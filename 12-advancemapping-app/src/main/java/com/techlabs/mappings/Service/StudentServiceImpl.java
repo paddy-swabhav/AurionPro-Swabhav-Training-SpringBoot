@@ -86,6 +86,7 @@ public class StudentServiceImpl implements StudentService{
 		if(existingStudents==null)
 			existingStudents = new ArrayList<>();
 		
+		existingStudents.add(dbstudent);
 		coursesToAdd.add(course);
 		
 		});

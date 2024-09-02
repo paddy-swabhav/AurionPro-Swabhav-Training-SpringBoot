@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +24,10 @@ import com.techlabs.mappings.repository.CourseRepository;
 import com.techlabs.mappings.repository.InstructorRepository;
 import com.techlabs.mappings.repository.StudentRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 class CourseServiceImpl implements CourseService{
 
 	@Autowired
@@ -35,6 +41,8 @@ class CourseServiceImpl implements CourseService{
 	
 //	@Autowired
 //	private InstructorService instructorService; 
+	
+	private static final Logger Logger = LoggerFactory.getLogger(CourseServiceImpl.class);
 
 	@Override
 	public Course addCourse(CourseDto coursedto) {
@@ -43,8 +51,10 @@ class CourseServiceImpl implements CourseService{
 		course.setCourseName(coursedto.getCourseName());
 		course.setDuration(coursedto.getDuration());
 		course.setFees(coursedto.getFees());
+		course = courseRepo.save(course);
+		Logger.info("Course added Successfully: "+course.getCourseId());
 
-		return courseRepo.save(course);
+		return course;
 	}
 
 	@Override
@@ -126,8 +136,10 @@ class CourseServiceImpl implements CourseService{
 		
 		Optional<Course> optionalCourse = courseRepo.findById(courseid);
 		if(!optionalCourse.isPresent())
+		{
+			Logger.error("Course with given id not found");
 		return null;
-		
+		}
 		Course dbcourse = optionalCourse.get();
 		
 		return dbcourse;
