@@ -1,18 +1,16 @@
 package com.techlabs.bank.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.techlabs.bank.dto.PageResponse;
 import com.techlabs.bank.dto.TransactionDto;
 import com.techlabs.bank.service.TransactionService;
 
@@ -32,15 +30,15 @@ public class TransactionController {
     
 	@PreAuthorize("hasRole('ADMIN')") 
     @GetMapping("/transactions")
-    public ResponseEntity<List<TransactionDto>> getAllTransactions() {
-        List<TransactionDto> transactions = transactionService.getAllTransactions();
-        return ResponseEntity.ok(transactions);
+    public ResponseEntity<PageResponse<TransactionDto>> getAllTransactions(@RequestParam(defaultValue = "0") int pagenumber, @RequestParam(defaultValue = "10") int pagesize) {
+        
+        return ResponseEntity.ok(transactionService.getAllTransactions(pagenumber,pagesize));
     }
 
 	@PreAuthorize("hasAnyRole('ADMIN','CUSTOMER')") 
     @GetMapping("/transactions/account")
-    public ResponseEntity<List<TransactionDto>> getTransactionsForAccount(@RequestParam long accountNumber) {
-        List<TransactionDto> transactions = transactionService.getTransactionsForAccount(accountNumber);
-        return ResponseEntity.ok(transactions);
+    public ResponseEntity<PageResponse<TransactionDto>> getTransactionsForAccount(@RequestParam(defaultValue = "0") int pagenumber, @RequestParam(defaultValue = "10") int pagesize, @RequestParam long accountNumber) {
+
+        return ResponseEntity.ok(transactionService.getTransactionsForAccount(pagenumber,pagesize, accountNumber));
     }
 }

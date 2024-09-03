@@ -1,14 +1,13 @@
 package com.techlabs.bank.service;
 
-import java.util.List;
-
 import com.techlabs.bank.dto.CustomerDto;
+import com.techlabs.bank.dto.PageResponse;
 import com.techlabs.bank.entity.Customer;
 
 public interface CustomerService {
     CustomerDto addCustomer(CustomerDto customerDto);
     
-    List<CustomerDto> getAllCustomers();
+    PageResponse<CustomerDto> getAllCustomers(int pagenumber, int pagesize);
     
     CustomerDto getCustomerById(int customerId);
     

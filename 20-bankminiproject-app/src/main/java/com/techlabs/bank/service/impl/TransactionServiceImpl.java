@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.techlabs.bank.dto.AccountDto;
+import com.techlabs.bank.dto.PageResponse;
 import com.techlabs.bank.dto.TransactionDto;
 import com.techlabs.bank.entity.Account;
 import com.techlabs.bank.entity.Transaction;
@@ -28,29 +33,26 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public TransactionDto performTransaction(TransactionDto transactionDto) {
-    	
         Account senderAccount = accountRepository.findById(transactionDto.getAccountNumber())
                 .orElseThrow(() -> new RuntimeException("Sender Account not found"));
 
-        if (transactionDto.getType() == TransactionType.Credit) 
-        {
+        if (transactionDto.getType() == TransactionType.Credit) {
             senderAccount.setBalance(senderAccount.getBalance() + transactionDto.getAmount());
-        } 
-       
-        else if (transactionDto.getType() == TransactionType.Debit) 
-        {
-            if (senderAccount.getBalance() < transactionDto.getAmount()) 
-            {
+        }
+
+        if (transactionDto.getType() == TransactionType.Debit) {
+            if (senderAccount.getBalance() < transactionDto.getAmount()) {
                 throw new RuntimeException("Insufficient balance");
             }
             senderAccount.setBalance(senderAccount.getBalance() - transactionDto.getAmount());
-        } 
-       
-        else if (transactionDto.getType() == TransactionType.Transfer) 
-        {
-            if (senderAccount.getBalance() < transactionDto.getAmount())
-            {
+        }
+
+        if (transactionDto.getType() == TransactionType.Transfer) {
+            if (senderAccount.getBalance() < transactionDto.getAmount()) {
                 throw new RuntimeException("Insufficient balance");
+            }
+            if (transactionDto.getAccountNumber() == transactionDto.getReceiverAccountNumber()) {
+                throw new RuntimeException("Sender and receiver account numbers cannot be the same");
             }
             Account receiverAccount = accountRepository.findById(transactionDto.getReceiverAccountNumber())
                     .orElseThrow(() -> new RuntimeException("Receiver Account not found"));
@@ -72,11 +74,26 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionDto> getAllTransactions() {
-        List<Transaction> transactions = transactionRepository.findAll();
-        List<TransactionDto> transactionDtos = new ArrayList<>();
-        transactions.forEach(transaction -> transactionDtos.add(toTransactionDto(transaction)));
-        return transactionDtos;
+    public PageResponse<TransactionDto> getAllTransactions(int pageNo, int pageSize) {
+    	
+    	Pageable page = PageRequest.of(pageNo, pageSize); 
+		Page<Transaction> transactionPage = transactionRepository.findAll(page);
+       
+		PageResponse<TransactionDto> transactionPageResponse = new PageResponse();
+		transactionPageResponse.setTotalPages(transactionPage.getTotalPages());
+		transactionPageResponse.setTotalElements(transactionPage.getTotalElements());
+		transactionPageResponse.setSize(transactionPage.getSize());
+		transactionPageResponse.setLastPage(transactionPage.isLast());
+		
+		List<TransactionDto> transactionDtos = new ArrayList<>();
+		
+		transactionPage.getContent().forEach((transaction)->{
+			transactionDtos.add(toTransactionDto(transaction));
+		});
+        
+		transactionPageResponse.setContent(transactionDtos);
+
+        return transactionPageResponse;
     }
 
 //    @Override
@@ -93,11 +110,27 @@ public class TransactionServiceImpl implements TransactionService {
 //    }
     
     @Override
-    public List<TransactionDto> getTransactionsForAccount(long accountNumber) {
-        List<Transaction> transactions = transactionRepository.findBySenderAccount_AccountNumberOrReceiverAccount_AccountNumber(accountNumber, accountNumber);
-        List<TransactionDto> transactionDtos = new ArrayList<>();
-        transactions.forEach(transaction -> transactionDtos.add(toTransactionDto(transaction)));
-        return transactionDtos;
+    public PageResponse<TransactionDto> getTransactionsForAccount(int pageNo, int pageSize,long accountNumber) {
+
+        Pageable page = PageRequest.of(pageNo, pageSize); 
+		Page<Transaction> transactionPage = transactionRepository.findBySenderAccount_AccountNumberOrReceiverAccount_AccountNumber(accountNumber, accountNumber,page);
+
+       
+		PageResponse<TransactionDto> transactionPageResponse = new PageResponse();
+		transactionPageResponse.setTotalPages(transactionPage.getTotalPages());
+		transactionPageResponse.setTotalElements(transactionPage.getTotalElements());
+		transactionPageResponse.setSize(transactionPage.getSize());
+		transactionPageResponse.setLastPage(transactionPage.isLast());
+		
+		List<TransactionDto> transactionDtos = new ArrayList<>();
+		
+		transactionPage.getContent().forEach((transaction)->{
+			transactionDtos.add(toTransactionDto(transaction));
+		});
+        
+		transactionPageResponse.setContent(transactionDtos);
+
+        return transactionPageResponse;
     }
     
     

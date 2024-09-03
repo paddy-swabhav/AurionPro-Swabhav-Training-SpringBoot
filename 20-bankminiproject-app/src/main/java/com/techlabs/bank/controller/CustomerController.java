@@ -1,7 +1,5 @@
 package com.techlabs.bank.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techlabs.bank.dto.CustomerDto;
+import com.techlabs.bank.dto.PageResponse;
 import com.techlabs.bank.entity.Customer;
 import com.techlabs.bank.service.CustomerService;
 
@@ -41,9 +40,9 @@ public class CustomerController {
     
 	@PreAuthorize("hasRole('ADMIN')") 
     @GetMapping("/customers")
-    public ResponseEntity<List<CustomerDto>> getAllCustomers() {
-        List<CustomerDto> customers = customerService.getAllCustomers();
-        return ResponseEntity.ok(customers);
+    public ResponseEntity<PageResponse<CustomerDto>> getAllCustomers(@RequestParam(defaultValue = "0") int pagenumber, @RequestParam(defaultValue = "10") int pagesize) {
+       
+        return ResponseEntity.ok(customerService.getAllCustomers(pagenumber, pagesize));
     }
 
 	@PreAuthorize("hasRole('ADMIN')") 

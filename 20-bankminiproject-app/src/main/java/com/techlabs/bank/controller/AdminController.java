@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techlabs.bank.dto.AdminDto;
+import com.techlabs.bank.dto.PageResponse;
 import com.techlabs.bank.service.AdminService;
 
 @RestController
@@ -51,8 +52,8 @@ public class AdminController {
     
 	@PreAuthorize("hasRole('ADMIN')") 
     @GetMapping
-    public ResponseEntity<List<AdminDto>> getAllAdmins() {
-        List<AdminDto> admins = adminService.getAllAdmins();
-        return ResponseEntity.ok(admins);
+    public ResponseEntity<PageResponse<AdminDto>> getAllAdmins(@RequestParam(defaultValue = "0") int pagenumber,@RequestParam(defaultValue = "10") int pagesize) {
+
+        return ResponseEntity.ok(adminService.getAllAdmins(pagenumber, pagesize));
     }
 }

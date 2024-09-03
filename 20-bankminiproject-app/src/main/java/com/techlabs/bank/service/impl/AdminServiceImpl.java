@@ -5,9 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.techlabs.bank.dto.AccountDto;
 import com.techlabs.bank.dto.AdminDto;
+import com.techlabs.bank.dto.PageResponse;
+import com.techlabs.bank.entity.Account;
 import com.techlabs.bank.entity.Admin;
 import com.techlabs.bank.entity.User;
 import com.techlabs.bank.repository.AdminRepository;
@@ -41,11 +47,27 @@ public class AdminServiceImpl implements AdminService {
 //    }
 
     @Override
-    public List<AdminDto> getAllAdmins() {
-        List<Admin> admins = adminRepository.findAll();
-        List<AdminDto> adminDtos = new ArrayList<>();
-        admins.forEach(admin -> adminDtos.add(toAdminDto(admin)));
-        return adminDtos;
+    public PageResponse<AdminDto> getAllAdmins(int pageNo, int pageSize) {
+
+
+    	Pageable page = PageRequest.of(pageNo, pageSize); 
+		Page<Admin> adminPage = adminRepository.findAll(page);
+       
+		PageResponse<AdminDto> adminPageResponse = new PageResponse();
+		adminPageResponse.setTotalPages(adminPage.getTotalPages());
+		adminPageResponse.setTotalElements(adminPage.getTotalElements());
+		adminPageResponse.setSize(adminPage.getSize());
+		adminPageResponse.setLastPage(adminPage.isLast());
+		
+		List<AdminDto> adminDtos = new ArrayList<>();
+		
+		adminPage.getContent().forEach((admin)->{
+			adminDtos.add(toAdminDto(admin));
+		});
+        
+		adminPageResponse.setContent(adminDtos);
+
+        return adminPageResponse;
     }
     
     @Override
