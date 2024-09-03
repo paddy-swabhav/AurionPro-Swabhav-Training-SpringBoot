@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.techlabs.bank.service.AuthService"/>
-    <fullyQualifiedTypeName name="com.techlabs.bank.entity.Role"/>
-    <fullyQualifiedTypeName name="org.apache.tomcat.util.net.openssl.ciphers.Authentication"/>
-    <fullyQualifiedTypeName name="org.hibernate.annotations.Collate"/>
-    <fullyQualifiedTypeName name="com.techlabs.jwtsecured.service.CustomerService"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
-    <fullyQualifiedTypeName name="jakarta.persistence.Entity"/>
-    <fullyQualifiedTypeName name="jakarta.persistence.Table"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
     <fullyQualifiedTypeName name="jakarta.persistence.GeneratedValue"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Column"/>
@@ -60,4 +49,15 @@
     <fullyQualifiedTypeName name="org.springframework.data.domain.Page"/>
     <fullyQualifiedTypeName name="org.springframework.security.access.prepost.PreAuthorize"/>
     <fullyQualifiedTypeName name="org.springframework.security.crypto.password.PasswordEncoder"/>
+    <fullyQualifiedTypeName name="jakarta.validation.constraints.DecimalMin"/>
+    <fullyQualifiedTypeName name="jakarta.validation.constraints.Email"/>
+    <fullyQualifiedTypeName name="jakarta.validation.constraints.Min"/>
+    <fullyQualifiedTypeName name="jakarta.validation.constraints.NotBlank"/>
+    <fullyQualifiedTypeName name="jakarta.validation.constraints.Size"/>
+    <fullyQualifiedTypeName name="jakarta.validation.constraints.Pattern"/>
+    <fullyQualifiedTypeName name="jakarta.validation.Valid"/>
+    <fullyQualifiedTypeName name="jakarta.validation.constraints.NotNull"/>
+    <fullyQualifiedTypeName name="org.springframework.aop.ThrowsAdvice"/>
+    <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ExceptionHandler"/>
 </qualifiedTypeNameHistroy>

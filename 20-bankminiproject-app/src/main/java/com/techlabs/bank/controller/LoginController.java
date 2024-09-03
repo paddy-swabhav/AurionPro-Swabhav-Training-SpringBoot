@@ -13,6 +13,8 @@ import com.techlabs.bank.dto.RegistrationDto;
 import com.techlabs.bank.entity.User;
 import com.techlabs.bank.service.AuthService;
 
+import jakarta.validation.Valid;
+
 @Controller
 @RequestMapping("/bank/users")
 public class LoginController {
@@ -21,13 +23,13 @@ public class LoginController {
 	private AuthService authService;
 	
 	@PostMapping("/register")
-	public ResponseEntity<User> register(@RequestBody RegistrationDto registrationDto)
+	public ResponseEntity<User> register(@Valid @RequestBody RegistrationDto registrationDto)
 	{
 		return ResponseEntity.ok(authService.register(registrationDto));
 	}
 	
 	@PostMapping("login")
-	public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginDto loginDto)
+	public ResponseEntity<JwtAuthResponse> login(@Valid @RequestBody LoginDto loginDto)
 	{
 		String token = authService.login(loginDto);
 		JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();

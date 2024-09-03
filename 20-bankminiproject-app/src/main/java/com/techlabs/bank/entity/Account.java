@@ -10,6 +10,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,8 @@ public class Account {
 	private long accountNumber;
 	
 	@Column(name = "balance")
+	@NotNull(message = "Balance cannot be null")
+	@DecimalMin(value = "1000", inclusive = true, message = "Minimum Balance should be 1000")
 	private double balance;
 	
 	@ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})

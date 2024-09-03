@@ -17,6 +17,7 @@ import com.techlabs.bank.dto.CustomerAccountsDto;
 import com.techlabs.bank.dto.PageResponse;
 import com.techlabs.bank.entity.Account;
 import com.techlabs.bank.entity.Customer;
+import com.techlabs.bank.exception.CustomerNotFoundException;
 import com.techlabs.bank.repository.AccountRepository;
 import com.techlabs.bank.repository.CustomerRepository;
 import com.techlabs.bank.service.AccountService;
@@ -52,7 +53,7 @@ public class AccountServiceImpl implements AccountService {
             // Return the DTO
             return toAccountDto(savedAccount);
         } else {
-            throw new RuntimeException("Customer not found with ID: " + accountDto.getCustomerId());
+            throw new CustomerNotFoundException(accountDto.getCustomerId());
         }
     }
 

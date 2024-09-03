@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,8 @@ public class Admin {
 	private int adminId;
 	
 	@Column(name = "email")
+    @NotBlank(message = "Email is mandatory")
+    @Email(message = "Invalid email format")
 	private String email;
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -33,6 +37,7 @@ public class Admin {
 	private User user;
 	
 	@Column(name = "name")
+	@NotBlank(message = "Name is mandatory")
 	private String name;
 	
 }

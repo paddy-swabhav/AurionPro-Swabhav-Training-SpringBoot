@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.aop.ThrowsAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +18,7 @@ import com.techlabs.bank.dto.PageResponse;
 import com.techlabs.bank.entity.Account;
 import com.techlabs.bank.entity.Customer;
 import com.techlabs.bank.entity.User;
+import com.techlabs.bank.exception.CustomerNotFoundException;
 import com.techlabs.bank.repository.CustomerRepository;
 import com.techlabs.bank.repository.UserRepository;
 import com.techlabs.bank.service.CustomerService;
@@ -67,7 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto getCustomerById(int customerId) {
         Optional<Customer> customerOptional = customerRepository.findById(customerId);
         if (customerOptional.isEmpty()) {
-            return null; // or consider throwing an exception if needed
+            throw new CustomerNotFoundException(customerId);
         }
         return toCustomerDto(customerOptional.get());
     }
@@ -76,7 +78,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto assignUserToCustomer(int customerId, int userId) {
         Optional<Customer> customerOptional = customerRepository.findById(customerId);
         if (customerOptional.isEmpty()) {
-            throw new RuntimeException("Customer not found with ID: " + customerId);
+            throw new CustomerNotFoundException(customerId);
         }
 
         Optional<User> userOptional = userRepository.findById(userId);
@@ -105,7 +107,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto updateCustomerName(int customerId, String firstName, String lastName) {
         Optional<Customer> customerOptional = customerRepository.findById(customerId);
         if (customerOptional.isEmpty()) {
-            return null; // or consider throwing an exception if needed
+            throw new CustomerNotFoundException(customerId);
         }
         Customer customer = customerOptional.get();
         customer.setFirstName(firstName);
@@ -119,7 +121,7 @@ public class CustomerServiceImpl implements CustomerService {
         // Retrieve the customer by ID
         Optional<Customer> customerOptional = customerRepository.findById(customerId);
         if (customerOptional.isEmpty()) {
-            throw new NullPointerException("Customer not found with ID: " + customerId);
+            throw new CustomerNotFoundException(customerId);
         }
 
         Customer customer = customerOptional.get();
@@ -127,7 +129,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         // Check if the old password matches the encoded password in the database
         if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
-            throw new NullPointerException("Old password is incorrect.");
+            throw new RuntimeException("Old password is incorrect.");
         }
 
         // Set the new password (encode it before saving)
