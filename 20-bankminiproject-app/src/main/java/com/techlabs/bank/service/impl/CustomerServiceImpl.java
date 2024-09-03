@@ -22,6 +22,7 @@ import com.techlabs.bank.exception.CustomerNotFoundException;
 import com.techlabs.bank.repository.CustomerRepository;
 import com.techlabs.bank.repository.UserRepository;
 import com.techlabs.bank.service.CustomerService;
+import com.techlabs.bank.service.EmailService;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -34,6 +35,9 @@ public class CustomerServiceImpl implements CustomerService {
     
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private EmailService emailService;
 
     @Override
     public CustomerDto addCustomer(CustomerDto customerDto) {
@@ -91,7 +95,15 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setUser(user);  // Assign the User to the Customer
 
         Customer updatedCustomer = customerRepository.save(customer);  // Save the updated Customer entity
+        
+        //SEND REGISTER MAIL
+        emailService.sendCustomerRegistrationMail(updatedCustomer.getFirstName(), updatedCustomer.getUser().getUsername(), updatedCustomer.getEmail());
+        
         return toCustomerDto(updatedCustomer);
+        
+        
+
+        
     }
     
 //    @Override

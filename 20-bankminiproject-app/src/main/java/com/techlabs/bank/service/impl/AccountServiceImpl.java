@@ -21,6 +21,7 @@ import com.techlabs.bank.exception.CustomerNotFoundException;
 import com.techlabs.bank.repository.AccountRepository;
 import com.techlabs.bank.repository.CustomerRepository;
 import com.techlabs.bank.service.AccountService;
+import com.techlabs.bank.service.EmailService;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -30,6 +31,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private CustomerRepository customerRepository;
+    
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public AccountDto createAccount(AccountDto accountDto) {
@@ -50,6 +54,11 @@ public class AccountServiceImpl implements AccountService {
             // Save the account
             Account savedAccount = accountRepository.save(account);
 
+            
+            
+            //SEND ACCOUNT OPENING MAIL
+            emailService.sendAccountOpeningMail(customer.getEmail(), customer.getFirstName(), savedAccount.getAccountNumber());
+     
             // Return the DTO
             return toAccountDto(savedAccount);
         } else {
