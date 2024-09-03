@@ -7924,3 +7924,288 @@ java.util.concurrent.TimeoutException
 	at org.springframework.tooling.jdt.ls.commons.classpath.SendClasspathNotificationsJob.flush(SendClasspathNotificationsJob.java:178)
 	at org.springframework.tooling.jdt.ls.commons.classpath.SendClasspathNotificationsJob.run(SendClasspathNotificationsJob.java:149)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2024-09-03 00:28:36.642 -----------------------------------------------
+eclipse.buildId=4.24.0.202407191504
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springframework.boot.ide.branding.sts4
+
+!ENTRY ch.qos.logback.classic 1 0 2024-09-03 00:28:47.115
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-09-03 00:29:37.491
+!MESSAGE Logback config file: D:\Spring_Assignments\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.6.1.20240411-1122.xml
+
+!ENTRY org.eclipse.ui 2 0 2024-09-03 00:29:39.225
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2024-09-03 00:29:39.226
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.eclipse.ui 2 0 2024-09-03 00:29:40.093
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2024-09-03 00:29:40.093
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-09-03 00:29:49.676
+!MESSAGE Command list starting LS: org.springframework.tooling.boot.ls
+START:
+C:\sts-4.24.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.3.v20240426-1530\jre\bin\javaw.exe
+-cp
+C:\sts-4.24.0.RELEASE\plugins\org.springframework.tooling.boot.ls_1.56.0.202407191456\servers\spring-boot-language-server\BOOT-INF\classes;C:\sts-4.24.0.RELEASE\plugins\org.springframework.tooling.boot.ls_1.56.0.202407191456\servers\spring-boot-language-server\BOOT-INF\lib\*
+-Dsts.lsp.client=eclipse
+-Xmx1024m
+-XX:TieredStopAtLevel=1
+-Xlog:jni+resolve=off
+-Dspring.config.location=file:C:\sts-4.24.0.RELEASE\plugins\org.springframework.tooling.boot.ls_1.56.0.202407191456\servers\spring-boot-language-server\BOOT-INF\classes\application.properties
+-XX:ErrorFile=D:/Spring_Assignments/.metadata/.plugins/org.springframework.tooling.boot.ls/fatal-error-spring-boot_1725303589675
+org.springframework.ide.vscode.boot.app.BootLanguageServerBootApp
+--languageserver.hover-timeout=225
+END
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:49.680
+!MESSAGE DelegatingStreamConnectionProvider - Starting Boot LS
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-09-03 00:29:49.741
+!MESSAGE Started org.springframework.tooling.boot.ls LS process 11232
+
+!ENTRY org.eclipse.egit.ui 2 0 2024-09-03 00:29:54.583
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\pranay.mahadik'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.361
+!MESSAGE Boot project ADDED: 01-dependencyinjection-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.490
+!MESSAGE Starting Boot LS...
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.513
+!MESSAGE Started Boot LS process
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.519
+!MESSAGE Boot project ADDED: 02-firstspring-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.522
+!MESSAGE Boot project ADDED: 03-dbconnection-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.531
+!MESSAGE Boot project ADDED: 04-employee-dbconnection-app-1
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.578
+!MESSAGE Boot project ADDED: 05-bank-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.581
+!MESSAGE Boot project ADDED: 06-jpacrud-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.583
+!MESSAGE Boot project ADDED: 07-pagination-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.585
+!MESSAGE Boot project ADDED: 08-cashmgmt-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.587
+!MESSAGE Boot project ADDED: 09-exceptionhandling-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.588
+!MESSAGE Boot project ADDED: 10-validations-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.590
+!MESSAGE Boot project ADDED: 11-bankvalidation-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.597
+!MESSAGE Boot project ADDED: 12-advancemapping-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.663
+!MESSAGE Boot project ADDED: 13-cashmgmt-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.716
+!MESSAGE Boot project ADDED: 14-cashmgmt-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.765
+!MESSAGE Boot project ADDED: 15-Mail-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.820
+!MESSAGE Boot project ADDED: 16-bankminiproject-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.860
+!MESSAGE Boot project ADDED: 17-doucumenturl-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.956
+!MESSAGE Boot project ADDED: 18-captchatest-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.983
+!MESSAGE Boot project ADDED: 19-jwtsecurity-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:55.987
+!MESSAGE Boot project ADDED: 20-bankminiproject-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:56.007
+!MESSAGE Boot project ADDED: 21-btachapp-1
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 00:29:56.009
+!MESSAGE Boot project ADDED: banking_app
+
+!ENTRY org.eclipse.lsp4e 2 0 2024-09-03 00:30:17.359
+!MESSAGE Javadoc unavailable. Failed to obtain it.
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:386)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2096)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.getHoverInfo2(LSJavaHoverProvider.java:65)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY org.eclipse.lsp4e 2 0 2024-09-03 00:43:46.360
+!MESSAGE Javadoc unavailable. Failed to obtain it.
+!STACK 0
+java.lang.InterruptedException
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:386)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2096)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.getHoverInfo2(LSJavaHoverProvider.java:65)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 01:03:24.369
+!MESSAGE Classpath changed for project: 22-btachprocessing_assignment-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 01:03:24.378
+!MESSAGE Boot project ADDED: 22-btachprocessing_assignment-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 01:03:27.189
+!MESSAGE Classpath changed for project: 22-btachprocessing_assignment-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 01:04:19.352
+!MESSAGE Classpath changed for project: 22-btachprocessing_assignment-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 01:04:19.355
+!MESSAGE Boot project REMOVED: 22-btachprocessing_assignment-app
+
+!ENTRY org.eclipse.ui.ide 4 4 2024-09-03 01:04:19.359
+!MESSAGE Problems occurred refreshing the selected resources.
+!SUBENTRY 1 org.eclipse.core.resources 4 567 2024-09-03 01:04:19.359
+!MESSAGE The project description file (.project) for '22-btachprocessing_assignment-app' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+!STACK 0
+java.lang.Exception: The project description file (.project) for '22-btachprocessing_assignment-app' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:956)
+	at org.eclipse.core.internal.resources.Project.updateDescription(Project.java:1429)
+	at org.eclipse.core.internal.resources.File.updateMetadataFiles(File.java:402)
+	at org.eclipse.core.internal.localstore.RefreshLocalVisitor.visit(RefreshLocalVisitor.java:306)
+	at org.eclipse.core.internal.localstore.UnifiedTree.accept(UnifiedTree.java:119)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.refreshResource(FileSystemResourceManager.java:1026)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.refresh(FileSystemResourceManager.java:1009)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.refreshRoot(FileSystemResourceManager.java:1051)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.refresh(FileSystemResourceManager.java:1002)
+	at org.eclipse.core.internal.resources.Resource.refreshLocal(Resource.java:1601)
+	at org.eclipse.ui.actions.RefreshAction.refreshResource(RefreshAction.java:274)
+	at org.eclipse.ui.actions.RefreshAction$2.execute(RefreshAction.java:234)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.lambda$0(WorkspaceModifyOperation.java:112)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2451)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2476)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.run(WorkspaceModifyOperation.java:131)
+	at org.eclipse.jdt.ui.actions.RefreshAction$WrappedWorkbenchRefreshAction.run(RefreshAction.java:112)
+	at org.eclipse.jdt.ui.actions.RefreshAction.performRefresh(RefreshAction.java:178)
+	at org.eclipse.jdt.ui.actions.RefreshAction.lambda$0(RefreshAction.java:169)
+	at org.eclipse.jdt.internal.core.BatchOperation.executeOperation(BatchOperation.java:41)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2451)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2476)
+	at org.eclipse.jdt.core.JavaCore.run(JavaCore.java:6086)
+	at org.eclipse.jdt.internal.ui.actions.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:108)
+	at org.eclipse.jdt.internal.ui.actions.WorkbenchRunnableAdapter$1.run(WorkbenchRunnableAdapter.java:121)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 01:05:19.369
+!MESSAGE Classpath changed for project: 22-btachprocessing_assignment-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 01:05:36.373
+!MESSAGE Classpath changed for project: 22-btachprocessing_assignment-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 01:05:36.384
+!MESSAGE Boot project ADDED: 22-btachprocessing_assignment-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 01:05:39.468
+!MESSAGE Classpath changed for project: 22-btachprocessing_assignment-app
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 01:07:11.715
+!MESSAGE Classpath changed for project: 22-btachprocessing_assignment-app
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-09-03 09:48:17.689
+!MESSAGE Command list starting LS: org.springframework.tooling.boot.ls
+START:
+C:\sts-4.24.0.RELEASE\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.3.v20240426-1530\jre\bin\javaw.exe
+-cp
+C:\sts-4.24.0.RELEASE\plugins\org.springframework.tooling.boot.ls_1.56.0.202407191456\servers\spring-boot-language-server\BOOT-INF\classes;C:\sts-4.24.0.RELEASE\plugins\org.springframework.tooling.boot.ls_1.56.0.202407191456\servers\spring-boot-language-server\BOOT-INF\lib\*
+-Dsts.lsp.client=eclipse
+-Xmx1024m
+-XX:TieredStopAtLevel=1
+-Xlog:jni+resolve=off
+-Dspring.config.location=file:C:\sts-4.24.0.RELEASE\plugins\org.springframework.tooling.boot.ls_1.56.0.202407191456\servers\spring-boot-language-server\BOOT-INF\classes\application.properties
+-XX:ErrorFile=D:/Spring_Assignments/.metadata/.plugins/org.springframework.tooling.boot.ls/fatal-error-spring-boot_1725337097688
+org.springframework.ide.vscode.boot.app.BootLanguageServerBootApp
+--languageserver.hover-timeout=225
+END
+
+!ENTRY org.eclipse.lsp4e 4 0 2024-09-03 09:48:17.690
+!MESSAGE ExecutionException occurred during shutdown of EndpointProxy for org.eclipse.lsp4j.jsonrpc.RemoteEndpoint@13edc01f
+!STACK 0
+java.util.concurrent.ExecutionException: org.eclipse.lsp4j.jsonrpc.JsonRpcException: java.io.IOException: The pipe is being closed
+	at java.base/java.util.concurrent.CompletableFuture.reportGet(CompletableFuture.java:396)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2096)
+	at org.eclipse.lsp4e.LanguageServerWrapper.lambda$10(LanguageServerWrapper.java:551)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1796)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188)
+Caused by: org.eclipse.lsp4j.jsonrpc.JsonRpcException: java.io.IOException: The pipe is being closed
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageConsumer.consume(StreamMessageConsumer.java:72)
+	at org.eclipse.lsp4e.LanguageServerWrapper.lambda$3(LanguageServerWrapper.java:313)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.request(RemoteEndpoint.java:171)
+	at org.eclipse.lsp4j.jsonrpc.services.EndpointProxy.invoke(EndpointProxy.java:91)
+	at jdk.proxy15/jdk.proxy15.$Proxy38.shutdown(Unknown Source)
+	at org.eclipse.lsp4e.LanguageServerWrapper.lambda$10(LanguageServerWrapper.java:549)
+	... 7 more
+Caused by: java.io.IOException: The pipe is being closed
+	at java.base/java.io.FileOutputStream.writeBytes(Native Method)
+	at java.base/java.io.FileOutputStream.write(FileOutputStream.java:367)
+	at java.base/java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:125)
+	at java.base/java.io.BufferedOutputStream.implFlush(BufferedOutputStream.java:252)
+	at java.base/java.io.BufferedOutputStream.flush(BufferedOutputStream.java:240)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageConsumer.consume(StreamMessageConsumer.java:69)
+	... 12 more
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 09:48:17.692
+!MESSAGE DelegatingStreamConnectionProvider - Starting Boot LS
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2024-09-03 09:48:17.694
+!MESSAGE DelegatingStreamConnectionProvider - Stopping Boot LS
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-09-03 09:48:17.699
+!MESSAGE Stopped org.springframework.tooling.boot.ls LS process 11232
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2024-09-03 09:48:17.703
+!MESSAGE Started org.springframework.tooling.boot.ls LS process 25156
+
+!ENTRY org.eclipse.lsp4e 2 0 2024-09-03 09:48:18.688
+!MESSAGE Timeout waiting for data to generate LS hover
+!STACK 0
+java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1960)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2095)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.getHoverInfo2(LSJavaHoverProvider.java:65)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)

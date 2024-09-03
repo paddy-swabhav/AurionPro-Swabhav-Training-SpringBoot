@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,10 +23,18 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+	@PreAuthorize("hasRole('ADMIN')") 
     @PostMapping
     public ResponseEntity<AdminDto> addAdmin(@RequestBody AdminDto adminDto) {
         AdminDto savedAdmin = adminService.addAdmin(adminDto);
         return ResponseEntity.ok(savedAdmin);
+    }
+    
+	@PreAuthorize("hasRole('ADMIN')") 
+    @PutMapping
+    public ResponseEntity<AdminDto> assignUserToAdmin(@RequestParam int adminId, @RequestParam int userId)
+    {
+    	return ResponseEntity.ok(adminService.assignUserToAdmin(adminId, userId));
     }
 
 //    @GetMapping("/login")
@@ -39,6 +49,7 @@ public class AdminController {
 //        }
 //    }
     
+	@PreAuthorize("hasRole('ADMIN')") 
     @GetMapping
     public ResponseEntity<List<AdminDto>> getAllAdmins() {
         List<AdminDto> admins = adminService.getAllAdmins();

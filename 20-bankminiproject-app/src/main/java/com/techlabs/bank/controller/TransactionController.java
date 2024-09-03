@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,18 +23,21 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
 
+	@PreAuthorize("hasRole('CUSTOMER')") 
     @PostMapping("/transactions")
     public ResponseEntity<TransactionDto> performTransaction(@RequestBody TransactionDto transactionDto) {
         TransactionDto performedTransaction = transactionService.performTransaction(transactionDto);
         return ResponseEntity.ok(performedTransaction);
     }
     
+	@PreAuthorize("hasRole('ADMIN')") 
     @GetMapping("/transactions")
     public ResponseEntity<List<TransactionDto>> getAllTransactions() {
         List<TransactionDto> transactions = transactionService.getAllTransactions();
         return ResponseEntity.ok(transactions);
     }
 
+	@PreAuthorize("hasAnyRole('ADMIN','CUSTOMER')") 
     @GetMapping("/transactions/account")
     public ResponseEntity<List<TransactionDto>> getTransactionsForAccount(@RequestParam long accountNumber) {
         List<TransactionDto> transactions = transactionService.getTransactionsForAccount(accountNumber);
