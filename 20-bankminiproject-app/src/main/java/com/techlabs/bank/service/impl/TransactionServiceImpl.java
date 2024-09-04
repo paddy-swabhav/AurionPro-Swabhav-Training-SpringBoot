@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.techlabs.bank.dto.AccountDto;
@@ -41,6 +43,23 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public TransactionDto performTransaction(TransactionDto transactionDto) {
+    	
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	String username = authentication.getName();
+    	
+    	boolean flag = false;
+    	
+    	List<Account> user_accounts = customerRepo.findByUser_Username(username).getAccounts();
+    	
+    	for(Account account: user_accounts)
+    	{
+    		if(account.getAccountNumber()==transactionDto.getAccountNumber())
+    			flag = true;
+    	};
+    	
+    	if(flag==false)
+    		throw new RuntimeException("User Doesnt have specified Account");
+    	
         Account senderAccount = accountRepository.findById(transactionDto.getAccountNumber())
                 .orElseThrow(() -> new RuntimeException("Sender Account not found"));
 
