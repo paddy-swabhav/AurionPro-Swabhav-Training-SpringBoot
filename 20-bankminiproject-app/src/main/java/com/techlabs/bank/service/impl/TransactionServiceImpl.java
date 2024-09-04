@@ -16,7 +16,9 @@ import com.techlabs.bank.entity.Account;
 import com.techlabs.bank.entity.Transaction;
 import com.techlabs.bank.entity.TransactionType;
 import com.techlabs.bank.repository.AccountRepository;
+import com.techlabs.bank.repository.CustomerRepository;
 import com.techlabs.bank.repository.TransactionRepository;
+import com.techlabs.bank.service.EmailService;
 import com.techlabs.bank.service.TransactionService;
 
 import jakarta.transaction.Transactional;
@@ -29,6 +31,12 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
     private AccountRepository accountRepository;
+    
+    @Autowired
+    private EmailService emailService;
+    
+    @Autowired
+    private CustomerRepository customerRepo;
 
     @Override
     @Transactional
@@ -69,8 +77,19 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setDate(new java.sql.Date(System.currentTimeMillis()));
         
         Transaction savedTransaction = transactionRepository.save(transaction);
+        
+        TransactionDto transactionDto2 = toTransactionDto(savedTransaction);
+        
+        if (transactionDto.getType() == TransactionType.Credit) 
+        	emailService.creditNotificationMail(transactionDto2, customerRepo.findByAccounts_AccountNumber(transactionDto.getAccountNumber()).getFirstName(), customerRepo.findByAccounts_AccountNumber(transactionDto.getAccountNumber()).getEmail());
 
-        return toTransactionDto(savedTransaction);
+        if (transactionDto.getType() == TransactionType.Debit)
+        	emailService.debitNotificationMail(transactionDto2, customerRepo.findByAccounts_AccountNumber(transactionDto.getAccountNumber()).getFirstName(), customerRepo.findByAccounts_AccountNumber(transactionDto.getAccountNumber()).getEmail());
+
+        if (transactionDto.getType() == TransactionType.Transfer)
+        	emailService.transferNotificationMail(transactionDto2, customerRepo.findByAccounts_AccountNumber(transactionDto.getAccountNumber()).getFirstName(), customerRepo.findByAccounts_AccountNumber(transactionDto.getAccountNumber()).getEmail());
+
+        return transactionDto2;
     }
 
     @Override

@@ -2598,3 +2598,72 @@ Caused by: java.lang.Error: Unresolved compilation problem:
 2024-09-04T12:43:42.179+05:30  INFO 26320 --- [16-bankminiproject-app] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2024-09-04T12:43:42.184+05:30  INFO 26320 --- [16-bankminiproject-app] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
 2024-09-04T12:43:42.504+05:30  WARN 26320 --- [16-bankminiproject-app] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [UserApiException(status=404 NOT_FOUND, message=username)]
+2024-09-04T23:52:55.974+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] com.techlabs.bank.Application            : Starting Application using Java 21.0.3 with PID 35852 (D:\Spring_Assignments\20-bankminiproject-app\target\classes started by Pranay.Mahadik in D:\Spring_Assignments\20-bankminiproject-app)
+2024-09-04T23:52:55.986+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] com.techlabs.bank.Application            : No active profile set, falling back to 1 default profile: "default"
+2024-09-04T23:52:56.081+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-04T23:52:56.081+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-04T23:52:58.037+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-04T23:52:58.339+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 284 ms. Found 7 JPA repository interfaces.
+2024-09-04T23:53:00.408+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-09-04T23:53:00.448+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-04T23:53:00.449+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-04T23:53:00.586+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-04T23:53:00.586+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4504 ms
+2024-09-04T23:53:01.082+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-04T23:53:01.247+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-09-04T23:53:01.316+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-04T23:53:02.151+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-04T23:53:02.224+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-04T23:53:03.171+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4ea87d27
+2024-09-04T23:53:03.175+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-04T23:53:04.174+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] com.techlabs.bank.Application            : Starting Application using Java 21.0.3 with PID 37544 (D:\Spring_Assignments\20-bankminiproject-app\target\classes started by Pranay.Mahadik in D:\Spring_Assignments\20-bankminiproject-app)
+2024-09-04T23:53:04.187+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] com.techlabs.bank.Application            : No active profile set, falling back to 1 default profile: "default"
+2024-09-04T23:53:04.287+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-04T23:53:04.288+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-04T23:53:06.322+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-04T23:53:06.553+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-04T23:53:06.909+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-04T23:53:07.266+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 342 ms. Found 7 JPA repository interfaces.
+2024-09-04T23:53:08.388+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-09-04T23:53:08.702+05:30  WARN 35852 --- [16-bankminiproject-app] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-04T23:53:10.424+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-09-04T23:53:10.588+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-09-04T23:53:10.605+05:30  INFO 35852 --- [16-bankminiproject-app] [restartedMain] com.techlabs.bank.Application            : Started Application in 15.477 seconds (process running for 16.824)
+2024-09-04T23:53:10.720+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-09-04T23:53:10.759+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-04T23:53:10.760+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-04T23:53:10.869+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-04T23:53:10.870+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6581 ms
+2024-09-04T23:53:11.372+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-04T23:53:11.587+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-09-04T23:53:11.802+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-09-04T23:53:12.724+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-04T23:53:12.796+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-04T23:53:13.447+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2b59238f
+2024-09-04T23:53:13.450+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-04T23:53:15.275+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-04T23:53:15.443+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-04T23:53:16.524+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-09-04T23:53:16.815+05:30  WARN 37544 --- [16-bankminiproject-app] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-04T23:53:17.854+05:30  WARN 37544 --- [16-bankminiproject-app] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2024-09-04T23:53:17.883+05:30  WARN 37544 --- [16-bankminiproject-app] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2024-09-04T23:53:17.897+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-04T23:53:17.908+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-09-04T23:53:17.955+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-09-04T23:53:17.986+05:30  INFO 37544 --- [16-bankminiproject-app] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-09-04T23:53:18.039+05:30 ERROR 37544 --- [16-bankminiproject-app] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+

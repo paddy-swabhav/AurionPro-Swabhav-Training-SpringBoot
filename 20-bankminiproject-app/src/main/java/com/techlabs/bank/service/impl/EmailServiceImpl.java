@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.techlabs.bank.dto.TransactionDto;
 import com.techlabs.bank.entity.EmailDetails;
 import com.techlabs.bank.service.EmailService;
 
@@ -95,6 +96,85 @@ public class EmailServiceImpl implements EmailService{
 			mailMessage.setTo(mailId);
 			mailMessage.setText(mailBody);
 			mailMessage.setSubject("Customer Registeration Mail");
+			
+			javaMailSender.send(mailMessage);
+			
+			System.out.println("Mail Sent Succesfully");
+		}
+		catch (Exception e) {
+			System.out.println("Error While sending Mail" + e);
+		}
+		
+	}
+	
+	
+	@Override
+	public void creditNotificationMail(TransactionDto transaction, String firstName, String mailId) {
+		
+		String mailBody = "Hey "+firstName+"."
+				+ "\n Your account "+transaction.getAccountNumber() +" has been Successfully Credited with Rs."+transaction.getAmount();
+		
+		try {
+			
+			SimpleMailMessage mailMessage = new SimpleMailMessage();
+			
+			mailMessage.setFrom(sender);
+			mailMessage.setTo(mailId);
+			mailMessage.setText(mailBody);
+			mailMessage.setSubject("Credit Transaction Notification");
+			
+			javaMailSender.send(mailMessage);
+			
+			System.out.println("Mail Sent Succesfully");
+		}
+		catch (Exception e) {
+			System.out.println("Error While sending Mail" + e);
+		}
+		
+	}
+	
+	
+	@Override
+	public void debitNotificationMail(TransactionDto transaction, String firstName, String mailId) {
+		
+		String mailBody = "Hey "+firstName+"."
+				+ "\n Your account "+transaction.getAccountNumber()+" has been Successfully Debited with Rs."+transaction.getAmount();
+		
+		try {
+			
+			SimpleMailMessage mailMessage = new SimpleMailMessage();
+			
+			mailMessage.setFrom(sender);
+			mailMessage.setTo(mailId);
+			mailMessage.setText(mailBody);
+			mailMessage.setSubject("D Transaction Notification");
+			
+			javaMailSender.send(mailMessage);
+			
+			System.out.println("Mail Sent Succesfully");
+		}
+		catch (Exception e) {
+			System.out.println("Error While sending Mail" + e);
+		}
+		
+	}
+	
+	
+	@Override
+	public void transferNotificationMail(TransactionDto transaction, String firstName, String mailId) {
+		
+		String mailBody = "Hey "+firstName+"."
+				+ "\n You have successfully Transfered Rs."+transaction.getAmount()+" To "+transaction.getReceiverAccountNumber()+""
+						+ "\n From your account "+transaction.getAccountNumber();
+		
+		try {
+			
+			SimpleMailMessage mailMessage = new SimpleMailMessage();
+			
+			mailMessage.setFrom(sender);
+			mailMessage.setTo(mailId);
+			mailMessage.setText(mailBody);
+			mailMessage.setSubject("Transfer Transaction Notification");
 			
 			javaMailSender.send(mailMessage);
 			
