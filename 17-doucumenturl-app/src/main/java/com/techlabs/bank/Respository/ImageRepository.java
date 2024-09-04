@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.techlabs.bank.model.Image;
 
 @Repository
-public interface ImageRepository extends JpaRepository<Image, UUID>{
+public interface ImageRepository extends JpaRepository<Image, Integer>{
 
 }

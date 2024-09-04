@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -56,6 +57,7 @@ public class Customer {
 	@OneToMany(mappedBy = "customer" , cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
 	private List<Account> accounts;
 	
-	
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private List<Document> documents;
 	
 }

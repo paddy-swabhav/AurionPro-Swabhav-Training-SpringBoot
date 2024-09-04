@@ -1,5 +1,8 @@
 package com.techlabs.bank.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,9 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techlabs.bank.dto.CustomerDto;
+import com.techlabs.bank.dto.DocumentDto;
+import com.techlabs.bank.dto.ImageModel;
 import com.techlabs.bank.dto.PageResponse;
 import com.techlabs.bank.entity.Customer;
+import com.techlabs.bank.entity.KycStatus;
 import com.techlabs.bank.service.CustomerService;
+import com.techlabs.bank.service.ImageService;
 
 @RestController
 @RequestMapping("/bank")
@@ -23,6 +30,9 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+    
+    @Autowired
+    private ImageService imageService;
 
 	@PreAuthorize("hasRole('ADMIN')") 
     @PostMapping("/customers")
@@ -90,4 +100,27 @@ public class CustomerController {
     {
         return ResponseEntity.ok(customerService.updatePassword(customerId, oldPassword, newPassword));
     }
+	
+	@PreAuthorize("hasRole('CUSTOMER')")
+	@PostMapping("/customers/kyc")
+	public ResponseEntity<Map> uploadImage(ImageModel imageModel)
+	{
+		return imageService.uploadImage(imageModel);
+	}
+	
+	
+	@PreAuthorize("hasAnyRole('ADMIN','CUSTOMER')")
+	@GetMapping("/customer/kyc")
+	public ResponseEntity<List<DocumentDto>> getDocumentsByCustmoer(@RequestParam int customerId)
+	{
+		System.out.println(customerId);
+		return ResponseEntity.ok(imageService.getAllDocumentsByCustomerId(customerId));
+	}
+	
+	@PreAuthorize("hasRole('ADMIN')")
+	@PutMapping("/customers/kyc")
+	public ResponseEntity<DocumentDto> updateKyc(@RequestParam int customerId, @RequestParam int documentId,@RequestParam KycStatus status)
+	{
+		return ResponseEntity.ok(imageService.updateKycOfDocument(customerId, documentId, status));
+	}
 }
