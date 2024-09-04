@@ -56,6 +56,7 @@ public class SecurityConfig {
 	    
 	    http.authorizeHttpRequests(request -> request.requestMatchers("/bank/users/register").permitAll());
 	    http.authorizeHttpRequests(request -> request.requestMatchers("/bank/users/login").permitAll());
+	    http.authorizeHttpRequests(request -> request.requestMatchers("/bank/users/captcha").permitAll());
 
 	    http.authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.GET, "/bank/"));
 	    http.authorizeHttpRequests(request -> request.requestMatchers(HttpMethod.POST, "/bank/"));
