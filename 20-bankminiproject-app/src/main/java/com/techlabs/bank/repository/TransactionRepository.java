@@ -1,5 +1,7 @@
 package com.techlabs.bank.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,5 +14,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 	
 	Page<Transaction> findBySenderAccount_AccountNumberOrReceiverAccount_AccountNumber(long senderAccountNumber, long receiverAccountNumber,Pageable pageAble);
 	
+	List<Transaction> findBySenderAccount_AccountNumberOrReceiverAccount_AccountNumber(long senderAccountNumber, long receiverAccountNumber);
+
 
 }

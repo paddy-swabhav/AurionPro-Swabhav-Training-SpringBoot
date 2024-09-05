@@ -1,0 +1,7 @@
+"Transaction ID","Amount","Recipient Account","Date Time","Transaction Type"
+"1","200.0","Self","2024-09-04","Credit"
+"2","300.0","Self","2024-09-04","Debit"
+"3","900.0","433759300002","2024-09-04","Transfer"
+"4","500.0","Self","2024-09-04","Credit"
+"5","500.0","Self","2024-09-04","Credit"
+"6","900.0","433759300002","2024-09-04","Transfer"

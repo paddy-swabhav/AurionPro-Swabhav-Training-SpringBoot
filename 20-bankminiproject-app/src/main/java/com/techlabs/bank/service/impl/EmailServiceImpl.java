@@ -1,6 +1,8 @@
 package com.techlabs.bank.service.impl;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,10 +12,16 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.opencsv.CSVWriter;
 import com.techlabs.bank.dto.TransactionDto;
-import com.techlabs.bank.entity.EmailDetails;
+import com.techlabs.bank.entity.Account;
+import com.techlabs.bank.entity.Customer;
+import com.techlabs.bank.entity.Transaction;
+import com.techlabs.bank.repository.CustomerRepository;
+import com.techlabs.bank.repository.TransactionRepository;
 import com.techlabs.bank.service.EmailService;
 
+import io.jsonwebtoken.io.IOException;
 import jakarta.mail.internet.MimeMessage;
 
 @Service
@@ -22,8 +30,16 @@ public class EmailServiceImpl implements EmailService{
 	@Autowired
 	private JavaMailSender javaMailSender;
 	
+	@Autowired
+	private CustomerRepository customerRepo;
+	
+	@Autowired
+	private TransactionRepository transactionRepo;
+	
 	@Value("${spring.mail.username}") 
 	private String sender;
+	
+	
 	
 	@Override
 	public void sendAccountOpeningMail(String mailId, String firstName,long accountnumber) {
@@ -49,8 +65,68 @@ public class EmailServiceImpl implements EmailService{
 		
 	}
 
+	
+	public void exportTransactionsToCsv(List<Transaction> transaction, String filePath) {
+        // Define the CSV file header
+        String[] header = { "Transaction ID", "Amount", "Recipient Account", "Date Time", "Transaction Type" };
+        
+        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath))) {
+            // Write header
+            writer.writeNext(header);
+            
+            for (Transaction dto : transaction)
+            	System.out.println(dto.getTransactionId());
+            
+            // Write data rows
+            for (Transaction dto : transaction) {
+            	
+            	Account receiverAccount = dto.getReceiverAccount();
+            	String receiver = "Self";
+                if(receiverAccount != null)
+                {
+                	receiver = String.valueOf(dto.getReceiverAccount().getAccountNumber());
+                }
+
+            	
+                String[] data = {
+                    String.valueOf(dto.getTransactionId()),
+                    String.valueOf(dto.getAmount()),
+
+                    String.valueOf(receiver),
+                    dto.getDate().toString(),
+                    dto.getType().name()
+                };
+                writer.writeNext(data);
+            }
+            
+            System.out.println("CSV file was created successfully at: " + filePath);
+
+        } catch (IOException e) {
+            System.err.println("Error occurred while writing CSV file: " + e.getMessage());
+        }catch(Exception e) { 
+          System.err.println("Error occurred while writing CSV file: " + e.getMessage());
+        }
+    }
+	
+	
+	
+	
 	@Override
-	public void SendStatementMail(EmailDetails details) {
+	public void SendStatementMail(long accountNumber) {
+		
+		Customer customer = customerRepo.findByAccounts_AccountNumber(accountNumber);
+		if(customer==null)
+			throw new RuntimeException("No account number associated with this number found");
+		
+		String mailId = customer.getEmail();
+		String body = "You Trannsaction Statement for the account "+accountNumber;
+		
+		
+		
+		List<Transaction> transactions= transactionRepo.findBySenderAccount_AccountNumberOrReceiverAccount_AccountNumber(accountNumber, accountNumber);
+		
+		exportTransactionsToCsv(transactions,"transaction.csv" );
+		
 		
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		MimeMessageHelper mimeMessageHelper;
@@ -62,12 +138,12 @@ public class EmailServiceImpl implements EmailService{
 			mimeMessageHelper = new MimeMessageHelper(mimeMessage,true);
 			
 			 mimeMessageHelper.setFrom(sender);
-	         mimeMessageHelper.setTo(details.getRecipient());
-	         mimeMessageHelper.setText(details.getMsgBody());
-	         mimeMessageHelper.setSubject(details.getSubject());
+	         mimeMessageHelper.setTo(mailId);
+	         mimeMessageHelper.setText(body);
+	         mimeMessageHelper.setSubject("Transaction Statement");
 	         
 	         // Adding the attachment
-	         FileSystemResource file = new FileSystemResource(new File(details.getAttachment()));
+	         FileSystemResource file = new FileSystemResource(new File("transaction.csv"));
 	         
 	         mimeMessageHelper.addAttachment(file.getFilename(), file);
 	         
@@ -185,5 +261,13 @@ public class EmailServiceImpl implements EmailService{
 		}
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

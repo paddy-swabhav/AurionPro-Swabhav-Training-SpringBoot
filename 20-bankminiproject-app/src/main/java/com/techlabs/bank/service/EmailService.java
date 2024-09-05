@@ -5,9 +5,7 @@ import com.techlabs.bank.entity.EmailDetails;
 
 public interface EmailService {
  
-    // Method
-    // To send an email with attachment
-    void SendStatementMail(EmailDetails details);
+
 
 	void sendAccountOpeningMail(String mailId, String firstName, long accountnumber);
 	
@@ -18,4 +16,6 @@ public interface EmailService {
 	void debitNotificationMail(TransactionDto transaction, String firstName, String mailId);
 
 	void creditNotificationMail(TransactionDto transaction, String firstName, String mailId);
+
+	void SendStatementMail(long accountNumber);
 }

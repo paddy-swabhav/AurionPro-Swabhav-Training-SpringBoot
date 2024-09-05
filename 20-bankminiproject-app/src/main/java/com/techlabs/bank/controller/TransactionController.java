@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.techlabs.bank.dto.PageResponse;
 import com.techlabs.bank.dto.TransactionDto;
+import com.techlabs.bank.service.EmailService;
 import com.techlabs.bank.service.TransactionService;
 
 @RestController
@@ -20,6 +21,9 @@ public class TransactionController {
 
     @Autowired
     private TransactionService transactionService;
+    
+    @Autowired
+    private EmailService emailService;
 
 	@PreAuthorize("hasRole('CUSTOMER')") 
     @PostMapping("/transactions")
@@ -41,4 +45,14 @@ public class TransactionController {
 
         return ResponseEntity.ok(transactionService.getTransactionsForAccount(pagenumber,pagesize, accountNumber));
     }
+	
+	@PreAuthorize("hasAnyRole('ADMIN','CUSTOMER')")
+	 @GetMapping("/transactions/csv")
+	 public ResponseEntity<String> getCsvofAccountTransaction(@RequestBody Long accountNumber){
+	  System.out.println(accountNumber);
+	  emailService.SendStatementMail(accountNumber);
+	  return ResponseEntity.ok("Transactions sent succesfully to your email");
+	 }
+	
+	
 }
