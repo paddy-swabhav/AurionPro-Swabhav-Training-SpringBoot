@@ -54,7 +54,7 @@ public class LoginController {
 	public ResponseEntity<JwtAuthResponse> login(@Valid @RequestBody LoginDto loginDto,HttpServletRequest request, @RequestParam("captcha") String captcha)
 	{
 
-		boolean flag;
+//		boolean flag;
 		String captchaSession = (String) request.getSession().getAttribute("captcha");
         if (!captcha.equals(captchaSession)) 
             throw new RuntimeException("Wrong Captcha");

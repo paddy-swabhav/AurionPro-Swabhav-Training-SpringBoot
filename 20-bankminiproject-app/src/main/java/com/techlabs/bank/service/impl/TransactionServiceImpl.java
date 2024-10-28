@@ -150,6 +150,23 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public PageResponse<TransactionDto> getTransactionsForAccount(int pageNo, int pageSize,long accountNumber) {
 
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	String username = authentication.getName();
+    	
+    	boolean flag = false;
+    	
+    	List<Account> user_accounts = customerRepo.findByUser_Username(username).getAccounts();
+    	
+    	for(Account account: user_accounts)
+    	{
+    		if(account.getAccountNumber()==accountNumber)
+    			flag = true;
+    	};
+    	
+    	if(flag==false)
+    		throw new RuntimeException("User Doesnt have specified Account");
+    	
+    	
         Pageable page = PageRequest.of(pageNo, pageSize); 
 		Page<Transaction> transactionPage = transactionRepository.findBySenderAccount_AccountNumberOrReceiverAccount_AccountNumber(accountNumber, accountNumber,page);
 
